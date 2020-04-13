@@ -1,0 +1,18 @@
+module.exports = function(sequelize, DataTypes) {
+    const Child = sequelize.define("Child", {
+    // create a Child model
+  fullName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+})
+
+Child.associate = function(models){
+  Child.belongsTo(models.Parent,{
+    foreignKey: {
+      allowNull: true
+    }
+  });
+}
+return Child;
+}
