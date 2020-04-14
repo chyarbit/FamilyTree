@@ -21,10 +21,13 @@ const db = require('../models');
       })
     
     // getEntireFamilyTree
-    router.get("/api/children/family", (req, res)=>{
+    router.get("/api/family", (req, res)=>{
         db.Child.findAll({
             // INNER JOIN on parents
-            include: [db.Parent]
+            include: {
+                model: db.Parent
+            }
+           
             })
         .then(results => res.json(results))
         .catch(error => res.json(error))
@@ -38,4 +41,15 @@ const db = require('../models');
         .catch(error => res.json(error))
     })
 
+// update routes- backend only- not available on the front end
+// updateChildren
+  router.put("/api/children/:id", (req,res) =>{
+    db.Child.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(results => res.json(results))
+    .catch(error => res.json(error))
+})
 module.exports = router;

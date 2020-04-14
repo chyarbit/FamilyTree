@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
   }
 })
 
+// Creates a column ParentId in the Child table that is linked to the parent table 
 Child.associate = function(models){
   Child.belongsTo(models.Parent,{
     foreignKey: {

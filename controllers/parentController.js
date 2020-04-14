@@ -22,12 +22,12 @@ const db = require('../models');
   })
 
 // getImmediateFamily: returns the immediate family for that parent id, includes parents and children
-router.get("api/parents/children/:id", (req, res)=>{
+router.get("/api/parents/children/:id", (req, res)=>{
     db.Parent.findAll({
         where: {
             id: req.params.id
         },
-        include: [{model: Child}]
+        include: [db.Child]
     })
     .then(results => res.json(results))
     .catch(error => res.json(error))
@@ -41,12 +41,13 @@ router.get("api/parents/children/:id", (req, res)=>{
       .catch(error => res.json(error))
   })
 
-// update routes
+// update routes- backend only- not available on the front end
+// If updating parent1, remember to reflect change in child table.
   // updateParents
   router.put("/api/parents/:id", (req,res) =>{
-      db.Parents.update(req.body, {
+      db.Parent.update(req.body, {
           where: {
-              id: req.body.id
+              id: req.params.id
           }
       })
       .then(results => res.json(results))
