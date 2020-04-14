@@ -1,0 +1,1 @@
+// root route - must be done before deployment to heroku.  just deploy a basic index.html with bootstrap
