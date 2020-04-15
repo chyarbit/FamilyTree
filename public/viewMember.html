@@ -2,111 +2,126 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>View Member</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="./css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Member</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="./css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="jumbotron">
-    <h1 class="display-4">Family Tree</h1>
-    <p class="lead">View information about an individual family member here. Click the buttons below to either add a
-      child, or add/update this member's partner!</p>
-    <hr class="my-4">
-  </div>
-  <!-- Row with buttons that pop out modal input forms -->
-  <div class="container member-div">
-    <h1 id="member-name"> Name Goes Here</h1>
-    <div id="member-tree"></div>
-    <div class="row">
-      <div class="col d-flex justify-content-center">
-        <div class="text-center">
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#childModal">Add
-            Child</button>
-          <!-- Modal -->
-          <div id="childModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="float-left modal-title">Add a Child</h4>
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form class="form-horizontal" action="/action_page.php">
-                    <div class="form-group row">
-                      <label class="control-label col-sm-3" for="child-name">Full Name</label>
-                      <div class="col-sm-8">
-                        <input class="form-control" id="child-name">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-offset-2 col-sm-10">
-                        <div class="row">
-                            <label class="control-label mx-2" for="email">Gender </label>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="gender-female" name="gender">
-                                <label class="custom-control-label" for="gender-female">Female</label>
-                              </div>
-                              <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="gender-male" name="gender">
-                                <label class="custom-control-label" for="gender-male">Male</label>
-                              </div>
-                              <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="gender-other" name="gender">
-                                <label class="custom-control-label" for="gender-other">Other</label>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                      </div>
-                    </div>
-                  </form>
-                <div class="modal-footer">
-                  <button type="button" id="child-submit-btn" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col d-flex justify-content-center">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#partnerModal">Add/Update
-          Partner</button>
-          <!-- Modal -->
-          <div id="partnerModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="float-left modal-title">Add/Update Partner</h4>
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                  <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" id="partner-submit-btn" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
+    <div class="jumbotron">
+        <h1 class="display-4">Family Tree</h1>
+        <p class="lead">View information about an individual family member here. Click the buttons below to either add a
+            child, or add/update this member's partner!</p>
+        <hr class="my-4">
     </div>
-  </div>
-
-
+    <!-- Row with buttons that pop out modal input forms -->
+    <div class="container member-div">
+        <h1 id="member-name"> Name Goes Here</h1>
+        <div id="member-tree"></div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="text-center">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#childModal">Add
+                        Child</button>
+                    <!-- Modal -->
+                    <div id="childModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="float-left modal-title">Add a Child</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form class="form-horizontal add-child-form" action="/action_page.php">
+                                    <div class="form-group row">
+                                        <label class="control-label col-sm-3" for="child-name">Full Name</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" id="child-name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="row">
+                                                <label class="control-label mx-2" for="email">Gender </label>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="gender-female"
+                                                        name="gender">
+                                                    <label class="custom-control-label"
+                                                        for="gender-female">Female</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="gender-male"
+                                                        name="gender">
+                                                    <label class="custom-control-label" for="gender-male">Male</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="gender-other"
+                                                        name="gender">
+                                                    <label class="custom-control-label" for="gender-other">Other</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-sm-3" for="child-name">Date of Birth</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" id="child-dob">
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" id="child-submit-btn" class="btn btn-default">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                    data-target="#partnerModal">Add/Update
+                    Partner</button>
+                <!-- Modal -->
+                <div id="partnerModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="float-left modal-title">Add/Update Partner</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal add-child-form" action="/action_page.php">
+                                    <div class="form-group row">
+                                        <label class="control-label col-sm-3" for="child-name">Full Name</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" id="child-name">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="modal-footer">
+                                    <button type="button" id="child-submit-btn" class="btn btn-default">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.0.js"
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 <script src="./js/viewMember.js"></script>
+
 </html>
