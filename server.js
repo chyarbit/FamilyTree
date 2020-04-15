@@ -9,7 +9,7 @@ app.use(express.static('public'));
 
 app.use(require('./controllers/parentController.js'));
 app.use(require('./controllers/childController.js'));
-//app.use(require('./controllers/htmlController.js'));
+app.use(require('./controllers/htmlController.js'));
 
 // { force: true } - drops the database
 db.sequelize.sync({ force: false }).then(function(){
