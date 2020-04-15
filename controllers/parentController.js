@@ -41,7 +41,7 @@ router.get("/api/parents/children/:id", (req, res)=>{
       .catch(error => res.json(error))
   })
 
-// update routes- backend only- not available on the front end
+// update routes: Should only update parent2 on front end
 // If updating parent1, remember to reflect change in child table.
   // updateParents
   router.put("/api/parents/:id", (req,res) =>{

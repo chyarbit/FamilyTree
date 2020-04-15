@@ -4,6 +4,14 @@ module.exports = function(sequelize, DataTypes) {
   fullName: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  gender: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  dob: {
+    type: DataTypes.DATE,
+    allowNull: false
   }
 })
 
