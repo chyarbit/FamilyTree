@@ -25,13 +25,13 @@
 <body>
   <div class="jumbotron">
     <h1 class="display-4">Family Tree</h1>
-    <p class="lead">Please add information about your head of household to start your family tree</p>
-    <hr class="my-4">
-    <a class="btn btn-primary btn-lg" href="/" role="button">View your family!</a>
+    <p class="lead">
+        <a class="btn btn-lg btn-secondary" href="/" role="button" id="viewFamilyButton">View your family!</a>
+    </p>
   </div>
 
-  <form class= "col-sm-3">
-    <div class="form-group row">
+  <form class= "col-sm-3" id="addInfo">
+    <div class="form-group row ">
       <label for="inputEmail3" class="col-sm-6 col-form-label">Full Name</label>
       <div class="col-sm-10">
         <input type="full-name" class="form-control" id="full-name" placeholder="Example- Queen Elizabeth">
@@ -79,7 +79,6 @@
     </div>
 
   </form>
-
 
 
 </body>
