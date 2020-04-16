@@ -38,26 +38,25 @@ $(document).ready(function () {
     event.preventDefault();
     var gender = $("input[name='gridRadios']:checked").val();
 
-    var firstChild = [
-      {
-        fullName: $("#full-name").val(),
-        gender: $("input[name='gridRadios']:checked").val(),
-        dob: $("#dob").val(),
-        ParentId: null
-      }
-    ]
-    console.log(firstChild);
-    var firstParent = [
-      {
-        parent1: $("#full-name").val(),
-        parent2: $("#partner").val()
-      }
-    ];
+    var firstChild =
+    {
+      fullName: $("#full-name").val(),
+      gender: $("input[name='gridRadios']:checked").val(),
+      dob: $("#dob").val()
+    };
+    var firstParent =
+    {
+      parent1: $("#full-name").val(),
+      parent2: $("#partner").val()
+    };
     // Grab data from form and send post request to database
     // Post to both Parent and Child tables
     $.post("/api/children", firstChild)
       .then(response => {
         console.log(response)
+
+        // Set local storage variable hasTree to true on successful post to database
+        localStorage.setItem("hasTree", true);
       })
       .catch(error => console.log(error))
 
@@ -66,8 +65,6 @@ $(document).ready(function () {
         console.log(response)
       })
       .catch(error => console.log(error))
-    // Set local storage variable hasTree to true on successful post to database
-    localStorage.setItem("hasTree", true);
     // Hide form and show user the tree
     document.getElementById("startForm").style.display = "none";
     displayTree();
