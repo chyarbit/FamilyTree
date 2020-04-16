@@ -55,16 +55,16 @@ $(document).ready(function () {
       .then(response => {
         console.log(response)
 
+        firstParent.parent1ID = response.id;
+        return  $.post("/api/parents", firstParent)
+      })
+      .then(response => {
+        console.log(response)        
         // Set local storage variable hasTree to true on successful post to database
         localStorage.setItem("hasTree", true);
       })
       .catch(error => console.log(error))
 
-    $.post("/api/parents", firstParent)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => console.log(error))
     // Hide form and show user the tree
     document.getElementById("startForm").style.display = "none";
     displayTree();

@@ -5,6 +5,10 @@ module.exports = function(sequelize, DataTypes) {
     type: DataTypes.STRING,
     allowNull: false
   },
+  parent1ID: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   parent2: DataTypes.STRING
 })
 

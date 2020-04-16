@@ -11,10 +11,20 @@ $(document).ready(function () {
     autoclose: true,
   };
   date_input.datepicker(options);
-  console.log(`view Member page is Ready, id: ${memberId}`);
+
+  function showMember(){
+    $.get(`/api/children/${memberId}`)
+    .then(response => {
+      console.log(response);
+      $("#member-name").text(response.fullName);
+    })
+  }
+
+  // console.log(`view Member page is Ready, id: ${memberId}`);
 
   $("#child-submit-btn").on("click", event => {
     
   })
 
+  showMember();
 });

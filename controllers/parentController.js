@@ -14,7 +14,7 @@ const db = require('../models');
   router.get("/api/parents/:id", (req, res)=>{
     db.Parent.findAll({
         where:{
-            id: req.params.id
+            parent1ID: req.params.id
         }
     })
     .then(results => res.json(results))
