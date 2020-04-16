@@ -9,4 +9,6 @@ body{
     background-color: rgb(187, 207, 208)
 }
 
-/* styling for startFamily.html*/
+#startForm{
+    display:none;
+}
