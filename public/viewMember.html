@@ -26,8 +26,9 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-4">Family Tree</h1>
-        <p class="lead">View information about an individual family member here. Click the buttons below to either add a
+        <p class="lead col-6">View information about an individual family member here. Click the buttons below to either add a
             child, or add/update this member's partner!</p>
+        <a class="btn btn-lg btn-secondary" href="/" role="button" id="viewFamilyButton">View your family!</a>
         <hr class="my-4">
     </div>
     <!-- Row with buttons that pop out modal input forms -->
@@ -58,7 +59,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="row">
-                                                <label class="control-label mx-2" for="email">Gender </label>
+                                                <label class="control-label mx-2" for="gender">Gender </label>
                                                 <div class="custom-control custom-radio custom-control-inline">
                                                     <input type="radio" class="custom-control-input" id="gender-female"
                                                         name="gender">
@@ -78,17 +79,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row justify-content-center">
                                         <div class="bootstrap-iso">
                                             <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <!-- Date input -->
-                                                        <label class="control-label" for="date">Date of Birth</label>
-                                                        <input class="form-control" id="child-dob" name="date"
-                                                            placeholder="MM/DD/YYY" type="text" />
-                                                    </div>
-
+                                                <div class="form-group">
+                                                    <!-- Date input -->
+                                                    <label class="control-label" for="date">Date of Birth</label>
+                                                    <input class="form-control" id="child-dob" name="date"
+                                                        placeholder="MM/DD/YYY" type="text" />
                                                 </div>
                                             </div>
                                         </div>
