@@ -11,5 +11,10 @@ $(document).ready(function () {
     autoclose: true,
   };
   date_input.datepicker(options);
-  console.log(`view Member page is Ready, id: ${memberId}`)
+  console.log(`view Member page is Ready, id: ${memberId}`);
+
+  $("#child-submit-btn").on("click", event => {
+    
+  })
+
 });
