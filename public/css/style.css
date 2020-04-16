@@ -1,0 +1,12 @@
+/* styling for all pages */
+.jumbotron{
+background-image: url('../images/family_tree_image5.jpg');
+background-size:100% 100%;
+background-repeat: no-repeat;
+} 
+
+body{
+    background-color: rgb(187, 207, 208)
+}
+
+/* styling for startFamily.html*/
