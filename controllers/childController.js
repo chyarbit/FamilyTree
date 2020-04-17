@@ -11,7 +11,7 @@ const db = require('../models');
       })
     // getOneChild
     router.get("/api/children/:id", (req, res)=>{
-        db.Child.findAll({
+        db.Child.findOne({
             where:{
                 id: req.params.id
             }

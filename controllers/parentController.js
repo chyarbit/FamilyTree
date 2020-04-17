@@ -12,7 +12,7 @@ const db = require('../models');
 
   // getOnePair
   router.get("/api/parents/:id", (req, res)=>{
-    db.Parent.findAll({
+    db.Parent.findOne({
         where:{
             parent1ID: req.params.id
         }
@@ -22,10 +22,10 @@ const db = require('../models');
   })
 
 // getImmediateFamily: returns the immediate family for that parent id, includes parents and children
-router.get("/api/parents/children/:id", (req, res)=>{
-    db.Parent.findAll({
+router.get("/api/household/:id", (req, res)=>{
+    db.Parent.findOne({
         where: {
-            id: req.params.id
+            Parent1ID: req.params.id
         },
         include: [db.Child]
     })
@@ -47,7 +47,7 @@ router.get("/api/parents/children/:id", (req, res)=>{
   router.put("/api/parents/:id", (req,res) =>{
       db.Parent.update(req.body, {
           where: {
-              id: req.params.id
+              parent1ID: req.params.id
           }
       })
       .then(results => res.json(results))
