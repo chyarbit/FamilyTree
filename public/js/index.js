@@ -22,8 +22,20 @@ $(document).ready(function () {
       // After get request is successful, display the data in a tree format. 
       .then(response => {
         console.log(response);
+        //console.log(response[0].fullName)
+      // After get request is successful, display the data in a tree format. 
+      // create a for loop to iterate through the array
+        for (var i=0; i<response.length; i++){
+        // get each person in household
+        var person = response[i];
+        console.log(person)
+        // hold the fullName data from the response
+        var fullName = $(`<a href= '/member/${person.id}'>`).text(person.fullName).addClass("family-fullName row")
+        // append
+        $("#familyInfo").append(fullName)
+        };
       })
-
+      
   }
 
   // when startButton is clicked, display form
