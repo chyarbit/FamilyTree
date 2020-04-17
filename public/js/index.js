@@ -155,12 +155,12 @@ $(document).ready(function () {
         console.log(response);
         // Set local storage variable hasTree to true on successful post to database
         localStorage.setItem("hasTree", true);
+        displayTree();
       })
       .catch((error) => console.log(error));
 
     // Hide form and show user the tree
     document.getElementById("startForm").style.display = "none";
-    displayTree();
   });
   // hide form and button when page loads if localstorage variable "hasTree" is true
   if (hasTree) {
@@ -169,14 +169,3 @@ $(document).ready(function () {
   }
 });
 
-// // when button is clicked, set to true so index.html knows to remove the startFamily button when it is reloaded
-// $("#addButton").on("click", function(event){
-//   // use preventDefault to prevent form from reloading due to built in functionality
-//   event.preventDefault();
-//   localStorage.setItem("addButton", true);
-//   // get values from form and do an ajax call to the server to send the data back to the server
-// })
-// $("#viewFamilyButton").on("click", function(event){
-
-//   localStorage.setItem("viewFamilyButton", true)
-// })
