@@ -3,12 +3,23 @@
 background-image: url('../images/family_tree_image5.jpg');
 background-size:100% 100%;
 background-repeat: no-repeat;
+font-family: 'Spectral', serif;
 } 
 
+h1{
+    font-family: 'Spectral', serif; 
+}
 body{
-    background-color: rgb(187, 207, 208)
+    background-color: rgb(187, 207, 208);
+    font-family: 'Spectral', serif;
 }
 
 #startForm{
     display:none;
+}
+
+#familyTreeContainer{
+    width: 1500px; 
+    min-height: 600px; 
+    background-color: #DAE4E4;
 }
