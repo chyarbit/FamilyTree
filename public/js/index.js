@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  var hasTree = localStorage.getItem("hasTree");
   var create = go.GraphObject.make;
 
   // date picker
@@ -18,9 +17,9 @@ $(document).ready(function () {
 
   // define Converters to be used for Bindings
   function genderBrushConverter(gender) {
-    if (gender === "male") return "blue";
-    if (gender === "female") return "pink";
-    return "orange";
+    if (gender === "male") return "#87CEFA";
+    if (gender === "female") return "#FFE4E1";
+    return "#8FBC8F";
   }
   // On page load, display the family tree if there is one.
   function displayTree() {
@@ -74,7 +73,7 @@ $(document).ready(function () {
             go.Shape,
             "Rectangle",
             {
-              fill: "lightgray",
+              fill: "#E0F5F5",
               stroke: null,
               strokeWidth: 0,
               stretch: go.GraphObject.Fill,
@@ -92,7 +91,9 @@ $(document).ready(function () {
           create("HyperlinkText",
           function(node) { return "/member/" + node.data.key; },
           function(node) { return node.data.name; },
-          { margin: 10 }
+          { margin: 10,
+            font: "700 16px Karla, sans-serif" 
+          }
           )
         );
 
@@ -124,8 +125,6 @@ $(document).ready(function () {
   // when startButton is clicked, display form
   $("#startButton").on("click", function (event) {
     document.getElementById("startForm").style.display = "initial";
-    // hide startbutton since form is displayed
-    document.getElementById("startButton").style.display = "none";
   });
 
   // Create on click event for form submit button
@@ -154,7 +153,6 @@ $(document).ready(function () {
       .then((response) => {
         console.log(response);
         // Set local storage variable hasTree to true on successful post to database
-        localStorage.setItem("hasTree", true);
         displayTree();
       })
       .catch((error) => console.log(error));
@@ -162,10 +160,6 @@ $(document).ready(function () {
     // Hide form and show user the tree
     document.getElementById("startForm").style.display = "none";
   });
-  // hide form and button when page loads if localstorage variable "hasTree" is true
-  if (hasTree) {
-    document.getElementById("startButton").style.display = "none";
-    displayTree();
-  }
+  displayTree();
 });
 
