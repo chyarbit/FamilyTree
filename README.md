@@ -12,7 +12,7 @@ To use this application, determine who will be the head of household of your fam
 You can organize your family tree by rearranging the nodes however you would like.  The lines will adjust to fit your model.  
 
 # Contributers
-This application was developed by jlchen6 and chyarbit.  
+This application was developed by jlchen6 and chyarbit.  Family tree visual is provided from the GoJS JavaScript library.    
 
 # Application link
 To access the website, please visit https://evening-brook-18525.herokuapp.com/ 
