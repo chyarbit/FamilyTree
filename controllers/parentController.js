@@ -1,16 +1,17 @@
+// require dependencies
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
 
 // get routes
-  // getAllParents
+  // getAllParents in the database
   router.get("/api/parents", (req,res)=>{
     db.Parent.findAll({})
       .then(results => res.json(results))
       .catch(error => res.json(error))
   })
 
-  // getOnePair
+  // getOnePair to get a single pair of parents 
   router.get("/api/parents/:id", (req, res)=>{
     db.Parent.findOne({
         where:{
@@ -53,7 +54,5 @@ router.get("/api/household/:id", (req, res)=>{
       .then(results => res.json(results))
       .catch(error => res.json(error))
   })
-
-
 
 module.exports = router;

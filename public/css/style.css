@@ -9,12 +9,14 @@ font-family: 'Karla', sans-serif;
 h1{
     font-family: 'Spectral', serif; 
 }
+
 body{
     background-color: rgb(187, 207, 208);
     font-family: 'Karla', sans-serif;
     font-size: 20px;
 }
 
+/* styling for index.html page */
 #startForm{
     display:none;
 }
