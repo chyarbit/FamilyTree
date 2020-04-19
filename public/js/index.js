@@ -1,7 +1,9 @@
+// document.ready used to ensure that everything is all set before running
 $(document).ready(function () {
+  // require GoJS to use their methods for the family tree
   var create = go.GraphObject.make;
 
-  // date picker
+  // date picker setup from Bootstrap
   var date_input = $('input[name="date"]'); //our date input has the name "date"
   var container =
     $(".bootstrap-iso form").length > 0
@@ -17,10 +19,14 @@ $(document).ready(function () {
 
   // define Converters to be used for Bindings
   function genderBrushConverter(gender) {
+    // if gender is male, return blue color
     if (gender === "male") return "#87CEFA";
+    // if gender is female, return pink color
     if (gender === "female") return "#FFE4E1";
+    // if gender is other, return green color
     return "#8FBC8F";
   }
+
   // On page load, display the family tree if there is one.
   function displayTree() {
     // Run get request to get the entire family tree
@@ -30,47 +36,51 @@ $(document).ready(function () {
     })
       // After get request is successful, display the data in a tree format.
       .then((response) => {
-        console.log(response);
+        // create variable familyArray as an empty array to hold the information that will be pushed 
         var familyArray = [];
 
-        //console.log(response[0].fullName)
         // After get request is successful, display the data in a tree format.
         // create a for loop to iterate through the array
         for (var i = 0; i < response.length; i++) {
           // get each person in household
           var person = response[i];
-          console.log(person);
-          // hold the fullName data from the response
-          // var fullName = $(`<a href= '/member/${person.id}'>`).text(person.fullName).addClass("family-fullName row")
-          // append
-          // $("#familyInfo").append(fullName)
+          // define familyMember object
           var familyMember = {
             name: person.fullName,
             key: person.id,
             gender: person.gender,
           };
+          // ensure that individual's node is linked to the correct parent node using the parentId
           if (person.Parent) {
             familyMember.parent = person.Parent.parent1ID;
-            console.log(person.Parent);
           }
+          // push information into the familyArray
           familyArray.push(familyMember);
         }
 
+        // create variable familyTree to use GoJS's create method for creating the family tree
         var familyTree = create(go.Diagram, "familyTreeContainer", 
         {
           allowCopy: false,
-            layout:  // create a TreeLayout for the family tree
+            layout:  // create a TreeLayout for the family tree with these specifications
               create(go.TreeLayout,
                 { angle: 90, nodeSpacing: 10, layerSpacing: 40, layerStyle: go.TreeLayout.LayerUniform })
         });
 
+        // calling GoJS's nodeTemplate to utilize their create method to create aspects of the family tree
         familyTree.nodeTemplate = create(
+          // calls on the Node class in the GoJS library to create nodes automatically
           go.Node,
           "Auto",
+          // nodes cannot be deleted
           { deletable: false},
+          // attach a text file so that each node can have a name
           new go.Binding("text", "name"),
+
+          // calls on the Shape class to define the visual characteristics of each node
           create(
             go.Shape,
+            // nodes will be a rectangle
             "Rectangle",
             {
               fill: "#E0F5F5",
@@ -79,16 +89,12 @@ $(document).ready(function () {
               stretch: go.GraphObject.Fill,
               alignment: go.Spot.Center,
             },
+            // fill rectangle based on information received in genderBrushConverter
             new go.Binding("fill", "gender", genderBrushConverter)
           ),
-          // create(go.TextBlock,
-          //   {
-          //     font: "700 12px Droid Serif, sans-serif",
-          //     textAlign: "center",
-          //     margin: 10, maxSize: new go.Size(80, NaN)
-          //   },
-          //   new go.Binding("text", "name"))
+          // uses GoJS's create method to create hyperlinks on the text on each node
           create("HyperlinkText",
+          // directs user to each node's individual member page
           function(node) { return "/member/" + node.data.key; },
           function(node) { return node.data.name; },
           { margin: 10,
@@ -97,27 +103,16 @@ $(document).ready(function () {
           )
         );
 
-        // define the Link template
+        // define the Link template (lines between nodes) using GoJS's create method
         familyTree.linkTemplate = create(
           go.Link, // the whole link panel
           { routing: go.Link.Orthogonal, corner: 5, selectable: false },
           create(go.Shape, { strokeWidth: 3, stroke: "#424242" })
-        ); // the gray link shape
-        // create(go.Node, "Horizontal",
-        // {
-        //   background: "gray"
-        // },
-        //   create(go.TextBlock, "Default Text",
-        //   {
-        //     margin: 12,
-        //     stroke: "white",
-        //     font: "bold 16px sans-serif"
-        //   },
-        //   new go.Binding("text", "name"))
-        // );
+        ); 
+
+        // create the family tree with information from the familyArray
         var treeModel = create(go.TreeModel);
         treeModel.nodeDataArray = familyArray;
-        console.log("TreeArray: ", treeModel.nodeDataArray);
         familyTree.model = treeModel;
       });
   }
@@ -129,30 +124,33 @@ $(document).ready(function () {
 
   // Create on click event for form submit button
   $("#addButton").on("click", function (event) {
+    // prevent page from reloading
     event.preventDefault();
+    // get value of gender input
     var gender = $("input[name='gridRadios']:checked").val();
 
+    // define object firstChild
     var firstChild = {
       fullName: $("#full-name").val(),
       gender: $("input[name='gridRadios']:checked").val(),
       dob: $("#dob").val(),
     };
+    // define object firstParent
     var firstParent = {
       parent1: $("#full-name").val(),
       parent2: $("#partner").val(),
     };
-    // Grab data from form and send post request to database
-    // Post to both Parent and Child tables
-    $.post("/api/children", firstChild)
-      .then((response) => {
-        console.log(response);
 
+    // Grab data from form and send post request to database
+    // Post to both Parent and Child tables 
+    $.post("/api/children", firstChild)
+      // if successful, match based on the parentId to ensure the correct relationship from node to parent
+      .then((response) => {
         firstParent.parent1ID = response.id;
         return $.post("/api/parents", firstParent);
       })
       .then((response) => {
-        console.log(response);
-        // Set local storage variable hasTree to true on successful post to database
+        // display tree
         displayTree();
       })
       .catch((error) => console.log(error));
