@@ -34,7 +34,7 @@ $(document).ready(function () {
       if(response.Children.length > 0){
         var children = $("<li>").text("Children: ");
         response.Children.forEach(child => {
-          var childPageLink = $(`<a href= '/member/${child.id}'>`).text(child.fullName);
+          var childPageLink = $(`<a href= '/member/${child.id}'>`).text(`${child.fullName} `);
           children.append(childPageLink);
         });
         data.append(children);
