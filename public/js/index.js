@@ -3,7 +3,7 @@ $(document).ready(function () {
   // require GoJS to use their methods for the family tree
   var create = go.GraphObject.make;
 
-  // date picker setup from Bootstrap
+  // date picker setup
   var date_input = $('input[name="date"]'); //our date input has the name "date"
   var container =
     $(".bootstrap-iso form").length > 0
@@ -29,6 +29,11 @@ $(document).ready(function () {
 
   // On page load, display the family tree if there is one.
   function displayTree() {
+    // If a diagram for the family tree already exists, clear it out before updating.
+    var projectDiagram = go.Diagram.fromDiv("familyTreeContainer");
+    if(projectDiagram){
+          projectDiagram.div = null;
+    }
     // Run get request to get the entire family tree
     $.ajax({
       url: "/api/family",
@@ -44,13 +49,14 @@ $(document).ready(function () {
         for (var i = 0; i < response.length; i++) {
           // get each person in household
           var person = response[i];
-          // define familyMember object
+          // define familyMember object.
+          // Each node in the tree has 3-4 main properties, name, key(id), gender(node color), and parent(defines links between nodes)
           var familyMember = {
             name: person.fullName,
             key: person.id,
             gender: person.gender,
           };
-          // ensure that individual's node is linked to the correct parent node using the parentId
+          // ensure that individual's node is linked to the correct parent node using the parentId.
           if (person.Parent) {
             familyMember.parent = person.Parent.parent1ID;
           }
@@ -110,9 +116,11 @@ $(document).ready(function () {
           create(go.Shape, { strokeWidth: 3, stroke: "#424242" })
         ); 
 
-        // create the family tree with information from the familyArray
+        // Create a treeModel to define the format of the created tree
         var treeModel = create(go.TreeModel);
+        // create the family tree with information from the familyArray
         treeModel.nodeDataArray = familyArray;
+        // Assign the created model to the tree.
         familyTree.model = treeModel;
       });
   }
@@ -132,7 +140,7 @@ $(document).ready(function () {
     // define object firstChild
     var firstChild = {
       fullName: $("#full-name").val(),
-      gender: $("input[name='gridRadios']:checked").val(),
+      gender: gender,
       dob: $("#dob").val(),
     };
     // define object firstParent
@@ -151,12 +159,19 @@ $(document).ready(function () {
       })
       .then((response) => {
         // display tree
-        displayTree();
       })
       .catch((error) => console.log(error));
 
-    // Hide form and show user the tree
+
+    // Hide form 
     document.getElementById("startForm").style.display = "none";
+    // Clear out form inputs
+    $("#full-name").val('');
+    $("input[name='gridRadios']:checked").prop("checked", false);
+    $("#dob").val('');
+    $("#partner").val('');
+    // Update tree diagram
+    displayTree();
   });
   displayTree();
 });

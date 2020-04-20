@@ -81,6 +81,10 @@ $(document).ready(function () {
         // The parent1ID should link to the child's entry in the Child table
         parent1ID: response.id
       }
+      // Empty out input fields on success
+      $("#child-name").val('');
+      $("input[name='gender']:checked").prop('checked', false);
+      $("#child-dob").val('');
       // Use promise chaining to call the route to create an entry for this child in the Parent table.
       return $.post("/api/parents", parentEntry)
     })
@@ -104,6 +108,7 @@ $(document).ready(function () {
    })
     .then(response => {
       // On success, refresh information on the page.
+      $("#partner-name").val('');
       showMember();
     })
     .catch(err => console.log(err));

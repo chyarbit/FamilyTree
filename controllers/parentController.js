@@ -12,7 +12,8 @@ const db = require('../models');
   })
 
   // getOnePair to get a single pair of parents 
-  router.get("/api/parents/:id", (req, res)=>{
+    // Searches based on the child Id of parent1
+    router.get("/api/parents/:id", (req, res)=>{
     db.Parent.findOne({
         where:{
             parent1ID: req.params.id
