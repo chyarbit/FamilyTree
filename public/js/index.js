@@ -29,6 +29,11 @@ $(document).ready(function () {
 
   // On page load, display the family tree if there is one.
   function displayTree() {
+    // If a diagram for the family tree already exists, clear it out before updating.
+    var projectDiagram = go.Diagram.fromDiv("familyTreeContainer");
+    if(projectDiagram){
+          projectDiagram.div = null;
+    }
     // Run get request to get the entire family tree
     $.ajax({
       url: "/api/family",
@@ -135,7 +140,7 @@ $(document).ready(function () {
     // define object firstChild
     var firstChild = {
       fullName: $("#full-name").val(),
-      gender: $("input[name='gridRadios']:checked").val(),
+      gender: gender,
       dob: $("#dob").val(),
     };
     // define object firstParent
@@ -154,12 +159,19 @@ $(document).ready(function () {
       })
       .then((response) => {
         // display tree
-        displayTree();
       })
       .catch((error) => console.log(error));
 
-    // Hide form and show user the tree
+
+    // Hide form 
     document.getElementById("startForm").style.display = "none";
+    // Clear out form inputs
+    $("#full-name").val('');
+    $("input[name='gridRadios']:checked").prop("checked", false);
+    $("#dob").val('');
+    $("#partner").val('');
+    // Update tree diagram
+    displayTree();
   });
   displayTree();
 });
